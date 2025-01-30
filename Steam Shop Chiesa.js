@@ -106,7 +106,7 @@
         }
     }
 
-    function request(url, options, callback) {
+    function 请求(url, options, callback) {
         let delayBetweenRequests = 300;
         let requestStorageHash = 'see:request:last';
 
@@ -121,7 +121,7 @@
         delayBetweenRequests = lastRequest.limited ? 2.5 * 60 * 1000 : delayBetweenRequests;
 
         if (timeSinceLastRequest < delayBetweenRequests) {
-            setTimeout(() => request(...arguments), delayBetweenRequests - timeSinceLastRequest);
+            setTimeout(() => 请求(...arguments), delayBetweenRequests - timeSinceLastRequest);
             return;
         }
 
@@ -423,7 +423,7 @@
         return market.getPriceBeforeFees(histogram.highest_buy_order);
     }
 
-    // Calculate the sellprice based on the history and listings.
+    // Calculate the sell price based on the history 和 listings.
     // applyOffset specifies whether the price offset should be applied when the listings are used to determine the price.
     function calculateSellPriceBeforeFees(history, histogram, applyOffset, minPriceBeforeFees, maxPriceBeforeFees) {
         const historyPrice = calculateAverageHistoryPriceBeforeFees(history);
@@ -513,7 +513,7 @@
             responseType: 'json'
         };
 
-        request(url, options, callback);
+        请求(url, options, callback);
     };
 
     // Removes an item.
@@ -532,7 +532,7 @@
             responseType: 'json'
         };
 
-        request(
+        请求(
             url,
             options,
             (error, data) => {
@@ -623,7 +623,7 @@
                 responseType: 'json'
             };
 
-            request(
+            请求(
                 url,
                 options,
                 (error, data) => {
@@ -665,7 +665,7 @@
                 responseType: 'json'
             };
 
-            request(
+            请求(
                 url,
                 options,
                 (error, data) => {
@@ -705,7 +705,7 @@
                 responseType: 'json'
             };
 
-            request(
+            请求(
                 url,
                 options,
                 (error, data) => {
@@ -740,7 +740,7 @@
             responseType: 'json'
         };
 
-        request(
+        请求(
             url,
             options,
             (error, data) => {
@@ -805,7 +805,7 @@
 
         const options = { method: 'GET' };
 
-        request(
+        请求(
             url,
             options,
             (error, data) => {
@@ -1015,10 +1015,10 @@
             return false;
         }
         // This is available on the inventory page.
-        const tags = item.tags != null
-            ? item.tags
-            : item.description != null && item.description.tags != null
-                ? item.description.tags
+        const 标签 = item.标签 != null
+            ? item.标签
+            : item.description != null && item.description.标签 != null
+                ? item.description.标签
                 : null;
         if (tags != null) {
             let isTaggedAsCrate = false;
@@ -1041,10 +1041,10 @@
         }
 
         // This is available on the inventory page.
-        const tags = item.tags != null
-            ? item.tags
-            : item.description != null && item.description.tags != null
-                ? item.description.tags
+        const 标签 = item.标签 != null
+            ? item.标签
+            : item.description != null && item.description.标签 != null
+                ? item.description.标签
                 : null;
         if (tags != null) {
             let isTaggedAsTradingCard = false;
