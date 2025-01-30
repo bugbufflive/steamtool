@@ -20,8 +20,8 @@
 // @require      https://raw.githubusercontent.com/rmariuzzo/checkboxes.js/91bec667e9172ceb063df1ecb7505e8ed0bae9ba/src/jquery.checkboxes.js
 // @grant        unsafeWindow
 // @grant        GM_addStyle
-// @downloadURL  https://raw.githubusercontent.com/Sneer-Cat/Steam-Economy-Enhancer/master/code.user.js
-// @updateURL    https://raw.githubusercontent.com/Sneer-Cat/Steam-Economy-Enhancer/master/code.user.js
+// @downloadURL  https://github.com/bugbufflive/steamtool/blob/3c66f6bf1d3b27a15ee75f7dcdc7c6407e41cf25/steam%20shop.js
+// @updateURL    https://github.com/bugbufflive/steamtool/blob/3c66f6bf1d3b27a15ee75f7dcdc7c6407e41cf25/steam%20shop.js
 // ==/UserScript==
 
 /* disable some eslint rules until the code is cleaned up */
@@ -29,7 +29,7 @@
 /* eslint no-undef: off */
 
 // jQuery is already added by Steam, force no conflict mode.
-(function($, async) {
+(function($， async) {
     $.noConflict(true);
 
     const PAGE_MARKET = 0;
