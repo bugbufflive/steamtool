@@ -28,7 +28,7 @@
 /* eslint no-undef: off */
 
 // jQuery is already added by Steam, force no conflict mode.
-(function($， async) {
+(function($, async) {
     $.noConflict(true);
 
     const PAGE_MARKET = 0;
@@ -242,7 +242,7 @@
 
     let storageSession;
 
-    const currentUrl = new网站(window.location.href);
+    const currentUrl = new URL(window.location.href);
     const noCache = currentUrl.searchParams.get('no-cache') != null;
 
     // This does not work the same as the 'normal' session storage because opening a new browser session/tab will clear the cache.
@@ -623,7 +623,7 @@
                 responseType: 'json'
             };
 
-            请求(
+            request(
                 url,
                 options,
                 (error, data) => {
@@ -665,7 +665,7 @@
                 responseType: 'json'
             };
 
-            请求(
+            request(
                 url,
                 options,
                 (error, data) => {
@@ -705,7 +705,7 @@
                 responseType: 'json'
             };
 
-            请求(
+            request(
                 url,
                 options,
                 (error, data) => {
@@ -740,7 +740,7 @@
             responseType: 'json'
         };
 
-        请求(
+        request(
             url,
             options,
             (error, data) => {
@@ -805,7 +805,7 @@
 
         const options = { method: 'GET' };
 
-        请求(
+        request(
             url,
             options,
             (error, data) => {
@@ -904,7 +904,7 @@
                     }
                 };
 
-                请求(
+                request(
                     url,
                     options,
                     (error, data) => {
@@ -1015,10 +1015,10 @@
             return false;
         }
         // This is available on the inventory page.
-        const 标签 = item.标签 != null
-            ? item.标签
-            : item.description != null && item.description.标签 != null
-                ? item.description.标签
+        const tags = item.tags != null
+            ? item.tags
+            : item.description != null && item.description.tags != null
+                ? item.description.tags
                 : null;
         if (tags != null) {
             let isTaggedAsCrate = false;
@@ -1041,10 +1041,10 @@
         }
 
         // This is available on the inventory page.
-        const 标签 = item.标签 != null
-            ? item.标签
-            : item.description != null && item.description.标签 != null
-                ? item.description.标签
+        const tags = item.tags != null
+            ? item.tags
+            : item.description != null && item.description.tags != null
+                ? item.description.tags
                 : null;
         if (tags != null) {
             let isTaggedAsTradingCard = false;
