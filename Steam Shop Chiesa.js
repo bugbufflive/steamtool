@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         SteamShopChiesa
+// @name         Steam Shop Chiesa
 // @icon         data:image/svg+xml,%0A%3Csvg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" clip-rule="evenodd" viewBox="0 0 267 267"%3E%3Ccircle cx="133.3" cy="133.3" r="133.3" fill="%2326566c"/%3E%3Cpath fill="%23ebebeb" fill-rule="nonzero" d="m50 133 83-83 84 83-84 84-83-84Zm83 62 62-61-62-62v123Z"/%3E%3C/svg%3E
 // @namespace    https://github.com/Nuklon
 // @author       Nuklon
@@ -19,8 +19,8 @@
 // @require      https://raw.githubusercontent.com/kapetan/jquery-observe/ca67b735bb3ae8d678d1843384ebbe7c02466c61/jquery-observe.js
 // @require      https://raw.githubusercontent.com/rmariuzzo/checkboxes.js/91bec667e9172ceb063df1ecb7505e8ed0bae9ba/src/jquery.checkboxes.js
 // @grant        unsafeWindow
-// @downloadURL  https://github.com/bugbufflive/steamtool/blob/7b05093d3397259d873529966b571a1f5c3d9b36/SteamShopChiesa.js
-// @updateURL    https://github.com/bugbufflive/steamtool/blob/7b05093d3397259d873529966b571a1f5c3d9b36/SteamShopChiesa.js
+// @downloadURL  https://github.com/bugbufflive/steamtool/blob/7b05093d3397259d873529966b571a1f5c3d9b36/Steam Shop Chiesa.js
+// @updateURL    https://github.com/bugbufflive/steamtool/blob/7b05093d3397259d873529966b571a1f5c3d9b36/Steam Shop Chiesa.js
 // ==/UserScript==
 
 /* disable some eslint rules until the code is cleaned up */
