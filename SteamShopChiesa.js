@@ -19,8 +19,8 @@
 // @require      https://raw.githubusercontent.com/kapetan/jquery-observe/ca67b735bb3ae8d678d1843384ebbe7c02466c61/jquery-observe.js
 // @require      https://raw.githubusercontent.com/rmariuzzo/checkboxes.js/91bec667e9172ceb063df1ecb7505e8ed0bae9ba/src/jquery.checkboxes.js
 // @grant        unsafeWindow
-// @downloadURL  https://github.com/bugbufflive/steamtool/blob/26ef6c44532b246f939c4351ec2b745ad253dde1/SteamShopChiesa.js
-// @updateURL    https://github.com/bugbufflive/steamtool/blob/26ef6c44532b246f939c4351ec2b745ad253dde1/SteamShopChiesa.js
+// @downloadURL  https://github.com/bugbufflive/steamtool/blob/67cba58f682209da56e115f1b898a573bfabb814/SteamShopChiesa.js
+// @updateURL    https://github.com/bugbufflive/steamtool/blob/67cba58f682209da56e115f1b898a573bfabb814/SteamShopChiesa.js
 // ==/UserScript==
 
 /* disable some eslint rules until the code is cleaned up */
