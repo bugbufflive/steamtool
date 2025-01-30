@@ -6,10 +6,10 @@
 // @license      MIT
 // @version      7.1.2
 // @description  Enhances the Steam Inventory and Steam Market.
-// @match        *://steamcommunity.com/id/*/inventory*
-// @match        *://steamcommunity.com/profiles/*/inventory*
-// @match        *://steamcommunity.com/market*
-// @match        *://steamcommunity.com/tradeoffer*
+// @match        https://steamcommunity.com/id/*/inventory*
+// @match        https://steamcommunity.com/profiles/*/inventory*
+// @match        https://steamcommunity.com/market*
+// @match        https://steamcommunity.com/tradeoffer*
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/async/2.6.0/async.js
