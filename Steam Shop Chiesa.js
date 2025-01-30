@@ -28,7 +28,7 @@
 /* eslint no-undef: off */
 
 // jQuery is already added by Steam, force no conflict mode.
-(function($， async) {
+(function($, async) {
     $.noConflict(true);
 
     const PAGE_MARKET = 0;
@@ -423,7 +423,7 @@
         return market.getPriceBeforeFees(histogram.highest_buy_order);
     }
 
-    // Calculate the sell price based on the history 和 listings.
+    // Calculate the sell price based on the history and listings.
     // applyOffset specifies whether the price offset should be applied when the listings are used to determine the price.
     function calculateSellPriceBeforeFees(history, histogram, applyOffset, minPriceBeforeFees, maxPriceBeforeFees) {
         const historyPrice = calculateAverageHistoryPriceBeforeFees(history);
@@ -705,7 +705,7 @@
                 responseType: 'json'
             };
 
-            请求(
+            request(
                 url,
                 options,
                 (error, data) => {
@@ -740,7 +740,7 @@
             responseType: 'json'
         };
 
-        请求(
+        request(
             url,
             options,
             (error, data) => {
@@ -904,7 +904,7 @@
                     }
                 };
 
-                请求(
+                request(
                     url,
                     options,
                     (error, data) => {
@@ -1041,10 +1041,10 @@
         }
 
         // This is available on the inventory page.
-        const 标签 = item.标签 != null
-            ? item.标签
-            : item.description != null && item.description.标签 != null
-                ? item.description.标签
+        const tags = item.tags != null
+            ? item.tags
+            : item.description != null && item.description.tags != null
+                ? item.description.tags
                 : null;
         if (tags != null) {
             let isTaggedAsTradingCard = false;
@@ -1296,7 +1296,7 @@
         const sellQueue = async.queue(
             (task, next) => {
                 totalNumberOfProcessedQueueItems++;
-
+                
                 const digits = getNumberOfDigits(totalNumberOfQueuedItems);
                 const itemId = task.item.assetid || task.item.id;
                 const itemName = task.item.name || task.item.description.name;
@@ -1308,8 +1308,7 @@
                     $(`#${task.item.appid}_${task.item.contextid}_${itemId}`).css('background', COLOR_PRICE_NOT_CHECKED);
                     next();
                     return;
-                }
-
+                }                
                 market.sellItem(
                     task.item,
                     task.sellPrice,
