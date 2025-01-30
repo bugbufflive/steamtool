@@ -242,7 +242,7 @@
 
     let storageSession;
 
-    const currentUrl = new URL(window.location.href);
+    const currentUrl = new网站(window.location.href);
     const noCache = currentUrl.searchParams.get('no-cache') != null;
 
     // This does not work the same as the 'normal' session storage because opening a new browser session/tab will clear the cache.
@@ -513,7 +513,7 @@
             responseType: 'json'
         };
 
-        请求(url, options, callback);
+        request(url, options, callback);
     };
 
     // Removes an item.
@@ -532,7 +532,7 @@
             responseType: 'json'
         };
 
-        请求(
+        request(
             url,
             options,
             (error, data) => {
@@ -623,7 +623,7 @@
                 responseType: 'json'
             };
 
-            request(
+            请求(
                 url,
                 options,
                 (error, data) => {
@@ -665,7 +665,7 @@
                 responseType: 'json'
             };
 
-            request(
+            请求(
                 url,
                 options,
                 (error, data) => {
@@ -740,7 +740,7 @@
             responseType: 'json'
         };
 
-        request(
+        请求(
             url,
             options,
             (error, data) => {
@@ -805,7 +805,7 @@
 
         const options = { method: 'GET' };
 
-        request(
+        请求(
             url,
             options,
             (error, data) => {
@@ -1015,10 +1015,10 @@
             return false;
         }
         // This is available on the inventory page.
-        const tags = item.tags != null
-            ? item.tags
-            : item.description != null && item.description.tags != null
-                ? item.description.tags
+        const 标签 = item.标签 != null
+            ? item.标签
+            : item.description != null && item.description.标签 != null
+                ? item.description.标签
                 : null;
         if (tags != null) {
             let isTaggedAsCrate = false;
@@ -1041,10 +1041,10 @@
         }
 
         // This is available on the inventory page.
-        const tags = item.tags != null
-            ? item.tags
-            : item.description != null && item.description.tags != null
-                ? item.description.tags
+        const 标签 = item.标签 != null
+            ? item.标签
+            : item.description != null && item.description.标签 != null
+                ? item.description.标签
                 : null;
         if (tags != null) {
             let isTaggedAsTradingCard = false;
@@ -1089,10 +1089,10 @@
         }
 
         // This is available on the inventory page.
-        const 标签 = item.标签 != null
-            ? item.标签
-            : item.description != null && item.description.标签 != null
-                ? item.description.标签
+        const tags = item.tags != null
+            ? item.tags
+            : item.description != null && item.description.tags != null
+                ? item.description.tags
                 : null;
         if (tags != null) {
             let isTaggedAsFoilTradingCard = false;
