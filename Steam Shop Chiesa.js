@@ -28,7 +28,7 @@
 /* eslint no-undef: off */
 
 // jQuery is already added by Steam, force no conflict mode.
-(function($, async) {
+(function($， async) {
     $.noConflict(true);
 
     const PAGE_MARKET = 0;
@@ -705,7 +705,7 @@
                 responseType: 'json'
             };
 
-            request(
+            请求(
                 url,
                 options,
                 (error, data) => {
@@ -740,7 +740,7 @@
             responseType: 'json'
         };
 
-        request(
+        请求(
             url,
             options,
             (error, data) => {
@@ -897,14 +897,14 @@
                     method: 'GET',
                     data: {
                         country: country,
-                        language: 'chinese',
+                        language: 'english',
                         currency: currencyId,
                         item_nameid: item_nameid,
                         two_factor: 0
                     }
                 };
 
-                request(
+                请求(
                     url,
                     options,
                     (error, data) => {
@@ -1041,10 +1041,10 @@
         }
 
         // This is available on the inventory page.
-        const tags = item.tags != null
-            ? item.tags
-            : item.description != null && item.description.tags != null
-                ? item.description.tags
+        const 标签 = item.标签 != null
+            ? item.标签
+            : item.description != null && item.description.标签 != null
+                ? item.description.标签
                 : null;
         if (tags != null) {
             let isTaggedAsTradingCard = false;
@@ -1089,10 +1089,10 @@
         }
 
         // This is available on the inventory page.
-        const tags = item.tags != null
-            ? item.tags
-            : item.description != null && item.description.tags != null
-                ? item.description.tags
+        const 标签 = item.标签 != null
+            ? item.标签
+            : item.description != null && item.description.标签 != null
+                ? item.description.标签
                 : null;
         if (tags != null) {
             let isTaggedAsFoilTradingCard = false;
