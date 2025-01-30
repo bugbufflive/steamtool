@@ -6,10 +6,10 @@
 // @license      MIT
 // @version      7.1.2
 // @description  Enhances the Steam Inventory and Steam Market.
-// @match        https://steamcommunity.com/id/*/inventory*
-// @match        https://steamcommunity.com/profiles/*/inventory*
-// @match        https://steamcommunity.com/market*
-// @match        https://steamcommunity.com/tradeoffer*
+// @match        *://steamcommunity.com/id/*/inventory*
+// @match        *://steamcommunity.com/profiles/*/inventory*
+// @match        *://steamcommunity.com/market*
+// @match        *://steamcommunity.com/tradeoffer*
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/async/2.6.0/async.js
@@ -19,9 +19,6 @@
 // @require      https://raw.githubusercontent.com/kapetan/jquery-observe/ca67b735bb3ae8d678d1843384ebbe7c02466c61/jquery-observe.js
 // @require      https://raw.githubusercontent.com/rmariuzzo/checkboxes.js/91bec667e9172ceb063df1ecb7505e8ed0bae9ba/src/jquery.checkboxes.js
 // @grant        unsafeWindow
-// @homepageURL  https://github.com/Nuklon/Steam-Economy-Enhancer
-// @homepage     https://github.com/Nuklon/Steam-Economy-Enhancer
-// @supportURL   https://github.com/Nuklon/Steam-Economy-Enhancer/issues
 // @downloadURL  https://raw.githubusercontent.com/Nuklon/Steam-Economy-Enhancer/master/code.user.js
 // @updateURL    https://raw.githubusercontent.com/Nuklon/Steam-Economy-Enhancer/master/code.user.js
 // ==/UserScript==
@@ -31,7 +28,7 @@
 /* eslint no-undef: off */
 
 // jQuery is already added by Steam, force no conflict mode.
-(function($， async) {
+(function($, async) {
     $.noConflict(true);
 
     const PAGE_MARKET = 0;
@@ -144,7 +141,7 @@
                 }
 
                 if (xhr.status >= 400) {
-                    const error = new Error('Http error');
+                    const error = new Error('HTTP 错误');
                     error.statusCode = xhr.status;
 
                     callback(error, data);
@@ -158,7 +155,7 @@
                     setLocalStorageItem(requestStorageHash, JSON.stringify(lastRequest));
                 }
 
-                const error = new Error('Request failed');
+                const error = new Error('请求失败');
                 error.statusCode = xhr.status;
 
                 callback(error);
@@ -245,7 +242,7 @@
 
     let storageSession;
 
-    const currentUrl = new URL(window.location.href);
+    const currentUrl = new网站(window.location.href);
     const noCache = currentUrl.searchParams.get('no-cache') != null;
 
     // This does not work the same as the 'normal' session storage because opening a new browser session/tab will clear the cache.
@@ -274,7 +271,7 @@
         try {
             return localStorage.getItem(name);
         } catch (e) {
-            logConsole(`Failed to get local storage item ${name}, ${e}.`);
+            logConsole(`无法获取 localStorage 内容，名称：${name}，原因：${e}。`);
             return null;
         }
     }
@@ -284,7 +281,7 @@
             localStorage.setItem(name, value);
             return true;
         } catch (e) {
-            logConsole(`Failed to set local storage item ${name}, ${e}.`);
+            logConsole(`无法设置 localStorage 内容，名称：${name}，原因：${e}。`)
             return false;
         }
     }
@@ -293,7 +290,7 @@
         try {
             return sessionStorage.getItem(name);
         } catch (e) {
-            logConsole(`Failed to get session storage item ${name}, ${e}.`);
+            logConsole(`无法获取 sessionStorage 内容，名称：${name}，原因：${e}。`);
             return null;
         }
     }
@@ -303,7 +300,7 @@
             sessionStorage.setItem(name, value);
             return true;
         } catch (e) {
-            logConsole(`Failed to set session storage item ${name}, ${e}.`);
+            logConsole(`无法设置 sessionStorage 内容，名称：${name}，原因：${e}。`)
             return false;
         }
     }
@@ -900,14 +897,14 @@
                     method: 'GET',
                     data: {
                         country: country,
-                        language: 'english',
+                        language: 'chinese',
                         currency: currencyId,
                         item_nameid: item_nameid,
                         two_factor: 0
                     }
                 };
 
-                request(
+                请求(
                     url,
                     options,
                     (error, data) => {
@@ -1237,9 +1234,9 @@
 
     function isRetryMessage(message) {
         const messageList = [
-            'You cannot sell any items until your previous action completes.',
-            'There was a problem listing your item. Refresh the page and try again.',
-            'We were unable to contact the game\'s item server. The game\'s item server may be down or Steam may be experiencing temporary connectivity issues. Your listing has not been created. Refresh the page and try again.'
+            "在上一个操作完成之前，您不能出售任何物品。",
+            "列出您的物品时出现问题。刷新页面并重试。",
+            "我们无法连接到游戏物品服务器。游戏物品服务器可能已经关闭，或 Steam 可能正面临临时连接问题。您的列表尚未创建。请刷新页面并重试。"
         ];
 
         return messageList.indexOf(message) !== -1;
@@ -1289,10 +1286,10 @@
             totals.innerHTML = '';
 
             if (totalPriceWithFeesOnMarket > 0) {
-                totals.innerHTML += `<div><strong>Total 这些物品无法添加到市场... ${formatPrice(totalPriceWithFeesOnMarket)},您将收到 ${formatPrice(totalPriceWithoutFeesOnMarket)}.</strong></div>`;
+                totals.innerHTML += `<div><strong>Total 累计上架物品总价为 ${formatPrice(totalPriceWithFeesOnMarket)},您将收到 ${formatPrice(totalPriceWithoutFeesOnMarket)}.</strong></div>`;
             }
             if (totalScrap > 0) {
-                totals.innerHTML += `<div><strong>Total scrap ${totalScrap}.</strong></div>`;
+                totals.innerHTML += `<div><strong>总共分解 ${totalScrap}.</strong></div>`;
             }
         }
 
@@ -1323,7 +1320,7 @@
                         const callback = () => setTimeout(() => next(), getRandomInt(1000, 1500));
 
                         if (success) {
-                            logDOM(`${padLeft} - ${itemNameWithAmount} 这些物品无法添加到市场... ${formatPrice(market.getPriceIncludingFees(task.sellPrice) * task.item.amount)},您将收到 ${formatPrice(task.sellPrice * task.item.amount)}.`);
+                            logDOM(`${padLeft} - ${itemName} 已添加至市场，售价为 ${formatPrice(market.getPriceIncludingFees(task.sellPrice))}，你将收到 ${formatPrice(task.sellPrice)}。`);
                             $(`#${task.item.appid}_${task.item.contextid}_${itemId}`).css('background', COLOR_SUCCESS);
 
                             totalPriceWithoutFeesOnMarket += task.sellPrice * task.item.amount;
@@ -1348,7 +1345,7 @@
                             return;
                         }
 
-                        logDOM(`${padLeft} - ${itemNameWithAmount} not added to market${message ? ` because:  ${message.charAt(0).toLowerCase()}${message.slice(1)}` : '.'}`);
+                        logDOM(`${padLeft} - ${itemName} 上架市场失败${message ? `，原因为 ${message.charAt(0).toLowerCase()}${message.slice(1)}` : '。'}`);
                         $(`#${task.item.appid}_${task.item.contextid}_${itemId}`).css('background', COLOR_ERROR);
 
                         callback();
@@ -1449,7 +1446,7 @@
                         $('#inventory_items_spinner').remove();
                         $('#inventory_sell_buttons').append(`<div id="inventory_items_spinner">${
                         spinnerBlock
-                        }<div style="text-align:center">Processing ${numberOfQueuedItems} items</div>` +
+                        }<div style="text-align:center">正在处理处理 ${numberOfQueuedItems} 个物品</div>` +
                         '</div>');
                     }
                 },
@@ -1540,8 +1537,8 @@
                     const padLeft = `${padLeftZero(`${totalNumberOfProcessedQueueItems}`, digits)} / ${totalNumberOfQueuedItems}`;
 
                     if (err != ERROR_SUCCESS) {
-                        logConsole(`Failed to get gems value for ${itemName}`);
-                        logDOM(`${padLeft} - ${itemName} not turned into gems due to missing gems value.`);
+                        logConsole(`无法获取 ${itemName} 分解后的宝石数。`);
+                        logDOM(`${padLeft} - ${itemName} 由于缺少宝石数，而未分解为宝石。`);
 
                         $(`#${item.appid}_${item.contextid}_${itemId}`).css('background', COLOR_ERROR);
                         return callback(false);
@@ -1553,8 +1550,8 @@
                         item,
                         (err) => {
                             if (err != ERROR_SUCCESS) {
-                                logConsole(`Failed to turn item into gems for ${itemName}`);
-                                logDOM(`${padLeft} - ${itemName} not turned into gems due to unknown error.`);
+                                logConsole(`无法将 ${itemName} 分解为宝石。`);
+                                logDOM(`${padLeft} - ${itemName} 由于未知错误，未分解为宝石。`);
 
                                 $(`#${item.appid}_${item.contextid}_${itemId}`).css('background', COLOR_ERROR);
                                 return callback(false);
@@ -1562,8 +1559,8 @@
 
                             logConsole('============================');
                             logConsole(itemName);
-                            logConsole(`Turned into ${goo.goo_value} gems`);
-                            logDOM(`${padLeft} - ${itemName} turned into ${item.goo_value_expected} gems.`);
+                            logConsole(`分解为 ${goo.goo_value} 个宝石`);
+                            logDOM(`${padLeft} - ${itemName} 已分解为 ${item.goo_value_expected} 个宝石。`);
                             $(`#${item.appid}_${item.contextid}_${itemId}`).css('background', COLOR_SUCCESS);
 
                             totalScrap += item.goo_value_expected;
@@ -1615,14 +1612,14 @@
                     const padLeft = `${padLeftZero(`${totalNumberOfProcessedQueueItems}`, digits)} / ${totalNumberOfQueuedItems}`;
 
                     if (err != ERROR_SUCCESS) {
-                        logConsole(`Failed to unpack booster pack ${itemName}`);
-                        logDOM(`${padLeft} - ${itemName} not unpacked.`);
+                        logConsole(`无法拆开补充包 ${itemName}`);
+                        logDOM(`${padLeft} - ${itemName} 拆包失败.`);
 
                         $(`#${item.appid}_${item.contextid}_${itemId}`).css('background', COLOR_ERROR);
                         return callback(false);
                     }
 
-                    logDOM(`${padLeft} - ${itemName} unpacked.`);
+                    logDOM(`${padLeft} - ${itemName} 拆包成功.`);
                     $(`#${item.appid}_${item.contextid}_${itemId}`).css('background', COLOR_SUCCESS);
 
                     callback(true);
@@ -1674,7 +1671,7 @@
                     $('#inventory_items_spinner').remove();
                     $('#inventory_sell_buttons').append(`<div id="inventory_items_spinner">${
                     spinnerBlock
-                    }<div style="text-align:center">Processing ${numberOfQueuedItems} items</div>` +
+                    }<div style="text-align:center">正在处理 ${numberOfQueuedItems} 个物品</div>` +
                     '</div>');
                 }
             }, () => {
@@ -1725,7 +1722,7 @@
                     $('#inventory_items_spinner').remove();
                     $('#inventory_sell_buttons').append(`<div id="inventory_items_spinner">${
                     spinnerBlock
-                    }<div style="text-align:center">Processing ${numberOfQueuedItems} items</div>` +
+                    }<div style="text-align:center">正在处理 ${numberOfQueuedItems} 个物品</div>` +
                     '</div>');
                 }
             }, () => {
@@ -1776,7 +1773,7 @@
                 const baseUrl = `${window.location.origin}/market/multisell`;
                 const redirectUrl = `${baseUrl}?appid=${appid}&contextid=${contextid}${itemsString}`;
 
-                const dialog = unsafeWindow.ShowDialog('Steam市场plus', `<iframe frameBorder="0" height="650" width="900" src="${redirectUrl}"></iframe>`);
+                const dialog = unsafeWindow.ShowDialog('Steam Economy Enhancer', `<iframe frameBorder="0" height="650" width="900" src="${redirectUrl}"></iframe>`);
                 dialog.OnDismiss(() => {
                     items.forEach((item) => {
                         const itemId = item.assetid || item.id;
@@ -1813,7 +1810,7 @@
                 $('#inventory_items_spinner').remove();
                 $('#inventory_sell_buttons').append(`<div id="inventory_items_spinner">${
                 spinnerBlock
-                }<div style="text-align:center">Processing ${numberOfQueuedItems} items</div>` +
+                }<div style="text-align:center">正在处理 ${numberOfQueuedItems} 个物品</div>` +
                 '</div>');
             }
         }
@@ -1851,7 +1848,7 @@
                 true,
                 (err, history, cachedHistory) => {
                     if (err) {
-                        logConsole(`Failed to get price history for ${itemName}`);
+                        logConsole(`无法获取 ${itemName} 的价格历史`);
 
                         if (err == ERROR_FAILED) {
                             failed += 1;
@@ -1863,7 +1860,7 @@
                         true,
                         (err, histogram, cachedListings) => {
                             if (err) {
-                                logConsole(`Failed to get orders histogram for ${itemName}`);
+                                logConsole(`无法获取 ${itemName} 的订单直方图`);
 
                                 if (err == ERROR_FAILED) {
                                     failed += 1;
@@ -1886,7 +1883,7 @@
                             );
 
 
-                            logConsole(`sell price: ${sellPrice / 100.0} (${market.getPriceIncludingFees(sellPrice) / 100.0})`);
+                            logConsole(`售价: ${sellPrice / 100.0} (${market.getPriceIncludingFees(sellPrice) / 100.0})`);
 
                             sellQueue.push({
                                 item: item,
@@ -2081,11 +2078,11 @@
                     $('.sell_selected').show();
                     if (canSellSelectedItemsManually(items)) {
                         $('.sell_manual').show();
-                        $('.sell_manual > span').text(`sell ${selectedItems}${selectedItems == 1 ? ' Item Manual' : ' Items Manual'}`);
+                        $('.sell_manual > span').text(`手动出售${selectedItems}${selectedItems == 1 ? '个物品' : '个物品'}`);
                     } else {
                         $('.sell_manual').hide();
                     }
-                    $('.sell_selected > span').text(`sell ${selectedItems}${selectedItems == 1 ? ' Item' : ' Items'}`);
+                    $('.sell_selected > span').text(`出售${selectedItems}${selectedItems == 1 ? '个物品' : '个物品'}`);
                 }
             });
         }
@@ -2099,7 +2096,7 @@
                 } else {
                     $('.turn_into_gems').show();
                     $('.turn_into_gems > span').
-                        text(`Turn ${selectedItems}${selectedItems == 1 ? ' Item Into Gems' : ' Items Into Gems'}`);
+                        text(`将${selectedItems}${selectedItems == 1 ? '个物品转化为宝石' : '个物品转化为宝石'}`);
                 }
             });
         }
@@ -2113,7 +2110,7 @@
                 } else {
                     $('.unpack_booster_packs').show();
                     $('.unpack_booster_packs > span').
-                        text(`Unpack ${selectedItems}${selectedItems == 1 ? ' Booster Pack' : ' Booster Packs'}`);
+                        text(`拆开${selectedItems}${selectedItems == 1 ? ' 补充包' : ' 补充包'}`);
                 }
             });
         }
@@ -2167,7 +2164,7 @@
             const ownerActions = $(`#${item_info_id}_item_owner_actions`);
 
             // Move market link to a button
-            ownerActions.append(`<a class="btn_small btn_grey_white_innerfade" href="/market/listings/${appid}/${market_hash_name}"><span>View in Community Market</span></a>`);
+            ownerActions.append(`<a class="btn_small btn_grey_white_innerfade" href="/market/listings/${appid}/${market_hash_name}"><span>在社区市场中查看</span></a>`);
             $(`#${item_info_id}_item_market_actions > div:nth-child(1) > div:nth-child(1)`).hide();
 
             // ownerActions is hidden on other games' inventories, we need to show it to have a "Market" button visible
@@ -2193,7 +2190,7 @@
                 false,
                 (err, histogram) => {
                     if (err) {
-                        logConsole(`Failed to get orders histogram for ${selectedItem.name || selectedItem.description.name}`);
+                        logConsole(`无法获取 ${selectedItem.name || selectedItem.description.name} 的订单直方图`);
                         return;
                     }
 
@@ -2204,11 +2201,11 @@
 
                     const groupMain = $(`<div id="listings_group">
                         <div>
-                            <div id="listings_sell">Sell</div>
+                            <div id="listings_sell">出售</div>
                             ${histogram.sell_order_table}
                         </div>
                         <div>
-                            <div id="listings_buy">Buy</div>
+                            <div id="listings_buy">购买</div>
                             ${histogram.buy_order_table}
                         </div>
                     </div>`);
@@ -2248,7 +2245,7 @@
                         <input id="quick_sell_input" style="background-color: black;color: white;border: transparent;max-width:65px;text-align:center;" type="number" value="${histogram.lowest_sell_order / 100}" step="0.01" />&nbsp;
                         <a class="item_market_action_button item_market_action_button_green quick_sell_custom">
                             <span class="item_market_action_button_edge item_market_action_button_left"></span>
-                            <span class="item_market_action_button_contents">➜ Sell</span>
+                            <span class="item_market_action_button_contents">➜ 出售</span>
                             <span class="item_market_action_button_edge item_market_action_button_right"></span>
                             <span class="item_market_action_button_preload"></span>
                         </a>
@@ -2296,7 +2293,7 @@
 
             $('#see_settings').remove();
             $('#global_action_menu').
-                prepend('<span id="see_settings"><a href="javascript:void(0)">⬖ Steam市场plus</a></span>');
+                prepend('<span id="see_settings"><a href="javascript:void(0)">⬖ SEE 设置</a></span>');
             $('#see_settings').on('click', '*', () => openSettings());
 
             const appId = getActiveInventory().m_appid;
@@ -2304,7 +2301,7 @@
             const TF2 = appId == 440;
 
             let buttonsHtml = `
-                <a class="btn_green_white_innerfade btn_medium_wide sell_all"><span> 全部出售物品</span></a>
+                <a class="btn_green_white_innerfade btn_medium_wide sell_all"><span> 出售全部物品</span></a>
                 <a class="btn_green_white_innerfade btn_medium_wide sell_all_duplicates"><span>出售所有重复物品</span></a>
                 <a class="btn_green_white_innerfade btn_medium_wide sell_selected" style="display:none"><span>出售所选物品</span></a>
                 <a class="btn_green_white_innerfade btn_medium_wide sell_manual" style="display:none"><span>手动出售</span></a>
@@ -2312,11 +2309,11 @@
 
             if (showMiscOptions) {
                 buttonsHtml += `
-                    <a class="btn_green_white_innerfade btn_medium_wide sell_all_cards"><span>出售所有卡片</span></a>
+                    <a class="btn_green_white_innerfade btn_medium_wide sell_all_cards"><span>出售所有卡牌</span></a>
                     <div class="see_inventory_buttons">
                         <a class="btn_darkblue_white_innerfade btn_medium_wide turn_into_gems" style="display:none"><span>将所选物品转换为宝石</span></a>
                         <a class="btn_darkblue_white_innerfade btn_medium_wide gem_all_duplicates"><span>将所有重复物品转换为宝石</span></a>
-                        <a class="btn_darkblue_white_innerfade btn_medium_wide unpack_booster_packs" style="display:none"><span>解包所选增强包</span></a>
+                        <a class="btn_darkblue_white_innerfade btn_medium_wide unpack_booster_packs" style="display:none"><span>拆开选中的补充包</span></a>
                     </div>
                 `;
             } else if (TF2) {
@@ -2527,7 +2524,7 @@
                 true,
                 (err, histogram, cachedListings) => {
                     if (err) {
-                        logConsole(`Failed to get orders histogram for ${itemName}`);
+                        logConsole(`无法获取 ${itemName} 的订单历史直方图`);
 
                         if (err == ERROR_FAILED) {
                             failed += 1;
@@ -2682,7 +2679,7 @@
                 true,
                 (errorPriceHistory, history, cachedHistory) => {
                     if (errorPriceHistory) {
-                        logConsole(`Failed to get price history for ${game_name}`);
+                        logConsole(`无法获取 ${game_name} 的价格历史`);
 
                         if (errorPriceHistory == ERROR_FAILED) {
                             failed += 1;
@@ -2694,7 +2691,7 @@
                         true,
                         (errorHistogram, histogram, cachedListings) => {
                             if (errorHistogram) {
-                                logConsole(`Failed to get orders histogram for ${game_name}`);
+                                logConsole(`无法获取 ${game_name}的订单历史直方图');
 
                                 if (errorHistogram == ERROR_FAILED) {
                                     failed += 1;
@@ -2713,14 +2710,14 @@
                             $(
                                 '.market_table_value > span:nth-child(1) > span:nth-child(1) > span:nth-child(1)',
                                 listingUI
-                            ).append(` ➤ <span title="This is likely the highest buy order price.">${
+                            ).append(` ➤ <span title="这可能是当前最高买价.">${
                             highestBuyOrderPrice
                             }</span>`);
 
                             logConsole('============================');
                             logConsole(JSON.stringify(listing));
                             logConsole(`${game_name}: ${asset.name}`);
-                            logConsole(`Current price: ${price / 100.0}`);
+                            logConsole(`当前价格: ${price / 100.0}`);
 
                             // Calculate two prices here, one without the offset and one with the offset.
                             // The price without the offset is required to not relist the item constantly when you have the lowest price (i.e., with a negative offset).
@@ -2743,17 +2740,17 @@
 
                             const sellPriceWithoutOffsetWithFees = market.getPriceIncludingFees(sellPriceWithoutOffset);
 
-                            logConsole(`Calculated price: ${sellPriceWithoutOffsetWithFees / 100.0} (${sellPriceWithoutOffset / 100.0})`);
+                            logConsole(`计算出的价格。: ${sellPriceWithoutOffsetWithFees / 100.0} (${sellPriceWithoutOffset / 100.0})`);
 
                             listingUI.addClass(`price_${sellPriceWithOffset}`);
 
                             $('.market_listing_my_price', listingUI).last().prop(
                                 'title',
-                                `The best price is ${formatPrice(sellPriceWithoutOffsetWithFees)}.`
+                                `最好的价格是 ${formatPrice(sellPriceWithoutOffsetWithFees)}.`
                             );
 
                             if (sellPriceWithoutOffsetWithFees < price) {
-                                logConsole('sell price is too high.');
+                                logConsole('卖的太高了');
 
                                 $('.market_listing_my_price', listingUI).last().
                                     css('background', COLOR_PRICE_EXPENSIVE);
@@ -2763,12 +2760,12 @@
                                     queueOverpricedItemListing(listing.listingid);
                                 }
                             } else if (sellPriceWithoutOffsetWithFees > price) {
-                                logConsole('sell price is too low.');
+                                logConsole('卖的太低了');
 
                                 $('.market_listing_my_price', listingUI).last().css('background', COLOR_PRICE_CHEAP);
                                 listingUI.addClass('underpriced');
                             } else {
-                                logConsole('sell price is fair.');
+                                logConsole('刚刚好');
 
                                 $('.market_listing_my_price', listingUI).last().css('background', COLOR_PRICE_FAIR);
                                 listingUI.addClass('fair');
@@ -2936,7 +2933,7 @@
                                 if (numberOfListings > 0) {
                                     $('#my_market_selllistings_number').text(numberOfListings.toString());
 
-                                    // This seems identical to the number of selllistings.
+                                    // This seems identical to the number of sell listings.
                                     $('#my_market_activelistings_number').text(numberOfListings.toString());
                                 }
                             },
@@ -3042,7 +3039,7 @@
                     return;
                 }
 
-                // Buy orders and listings confirmations are not grouped like the selllistings, add this so pagination works there as well.
+                // Buy orders and listings confirmations are not grouped like the sell listings, add this so pagination works there as well.
                 if (!$(this).attr('id')) {
                     $(this).attr('id', `market-listing-${e}`);
 
@@ -3126,7 +3123,7 @@
             market_listing_see.after('<ul class="paginationBottom pagination"></ul>');
 
             $('.market_listing_table_header', market_listing_see.parent()).
-                append('<input class="search" id="market_name_search" placeholder="Search..." />');
+                append('<input class="search" id="market_name_search" placeholder="搜索中..." />');
 
             let pageSize = parseInt(getSettingWithDefault(SETTING_MARKET_PAGE_COUNT), 10);
 
@@ -3221,7 +3218,7 @@
                 // Show the spinner so the user knows that something is going on.
                 $('.my_market_header').eq(0).append(`<div id="market_listings_spinner">${
                 spinnerBlock
-                }<div style="text-align:center">Loading market listings</div>` +
+                }<div style="text-align:center">正在加载交易列表</div>` +
                 '</div>');
 
                 while (currentCount < totalCount) {
@@ -3279,7 +3276,7 @@
                 if ($('.market_select_item', selectionGroup).length == 0) { // If there are no items to select, keep it at Select all.
                     invert = false;
                 }
-                $('.select_all > span', selectionGroup).text(invert ? 'Deselect all' : 'Select all');
+                $('.select_all > span', selectionGroup).text(invert ? '取消所选物品' : '全选');
             });
         }
 
@@ -3287,7 +3284,7 @@
         function sortMarketListings(elem, isPrice, isDate, isName) {
             const list = getListFromContainer(elem);
             if (list == null) {
-                console.log('Invalid parameter, could not find a list matching elem.');
+                console.log('无效参数，找不到匹配元素的列表。');
                 return;
             }
 
@@ -3580,7 +3577,7 @@
             });
 
             $('#see_settings').remove();
-            $('#global_action_menu').prepend('<span id="see_settings"><a href="javascript:void(0)">⬖ Steam市场plus</a></span>');
+            $('#global_action_menu').prepend('<span id="see_settings"><a href="javascript:void(0)">⬖ SEE 设置</a></span>');
             $('#see_settings').on('click', '*', () => openSettings());
 
             processMarketListings();
@@ -3680,13 +3677,13 @@
                 return a[1] - b[1];
             }).reverse();
 
-            let totalText = `<strong>Number of unique items: ${sortable.length}, worth ${formatPrice(totalPrice)}<br/><br/></strong>`;
+            let totalText = `<strong>物品种类数: ${sortable.length}, 价值 ${formatPrice(totalPrice)}<br/><br/></strong>`;
             let totalNumOfItems = 0;
             for (let i = 0; i < sortable.length; i++) {
                 totalText += `${sortable[i][1]}x ${sortable[i][0]}<br/>`;
                 totalNumOfItems += sortable[i][1];
             }
-            totalText += `<br/><strong>Total items: ${totalNumOfItems}</strong><br/>`;
+            totalText += `<br/><strong>物品总数: ${totalNumOfItems}</strong><br/>`;
 
             return totalText;
         }
@@ -3774,7 +3771,7 @@
 
         $('#inventory_displaycontrols').append(`<div class="trade_offer_buttons">
             <a class="item_market_action_button item_market_action_button_green select_all">
-                <span class="item_market_action_button_contents" style="text-transform:none">Select all from page</span>
+                <span class="item_market_action_button_contents" style="text-transform:none">选中页面中全部物品</span>
             </a>
         </div>`);
 
@@ -3799,31 +3796,31 @@
     function openSettings() {
         const price_options = $(`<div id="see_settings_modal">
             <div>
-                将价格计算为：&nbsp;
+                基准价格计算方式：&nbsp;
                 <select id="${SETTING_PRICE_ALGORITHM}">
                     <option value="1"${getSettingWithDefault(SETTING_PRICE_ALGORITHM) == 1 ? 'selected="selected"' : ''}>平均历史最高价和最低销售列表的最大值</option>
-                    <option value="2" ${getSettingWithDefault(SETTING_PRICE_ALGORITHM) == 2 ? 'selected="selected"' : ''}>最低销售列表</option>
-                    <option value="3" ${getSettingWithDefault(SETTING_PRICE_ALGORITHM) == 3 ? 'selected="selected"' : ''}>当前最高买入订单或最低卖出列表</option>
+                    <option value="2" ${getSettingWithDefault(SETTING_PRICE_ALGORITHM) == 2 ? 'selected="selected"' : ''}>最低售价</option>
+                    <option value="3" ${getSettingWithDefault(SETTING_PRICE_ALGORITHM) == 3 ? 'selected="selected"' : ''}>当前最高买入价或最低售价</option>
                 </select>
             </div>
             <div style="margin-top:6px;">
-                用于计算历史平均价格的小时数：&nbsp;
+                计算多少小时内的历史均价：&nbsp;
                 <input type="number" min="0" step="2" id="${SETTING_PRICE_HISTORY_HOURS}" value=${getSettingWithDefault(SETTING_PRICE_HISTORY_HOURS)}>
             </div>
             <div style="margin-top:6px;">
-                要添加到计算价格中的值（最小值和最大值将被遵守）：&nbsp;
+                价格补正（基于“基准价格”在批量出售时进行调价，可为负数）：&nbsp;
                 <input type="number" step="0.01" id="${SETTING_PRICE_OFFSET}" value=${getSettingWithDefault(SETTING_PRICE_OFFSET)}>
             </div>
             <div style="margin-top:6px">
-                当最低出售列表的数量较低时，使用第二低的出售列表：&nbsp;
+               当最低出售列表的数量较低时，使用第二低的出售列表：&nbsp;
                 <input type="checkbox" id="${SETTING_PRICE_IGNORE_LOWEST_Q}" ${getSettingWithDefault(SETTING_PRICE_IGNORE_LOWEST_Q) == 1 ? 'checked' : ''}>
             </div>
             <div style="margin-top:6px;">
-                不要检查价格等于或低于以下值的市场列表：&nbsp;
+                不检查指定价格及以下的市场列表：&nbsp;
                 <input type="number" step="0.01" id="${SETTING_PRICE_MIN_CHECK_PRICE}" value=${getSettingWithDefault(SETTING_PRICE_MIN_CHECK_PRICE)}>
             </div>
             <div style="margin-top:6px;">
-                不要上架价格等于或低于以下值的市场列表：:&nbsp;
+                不上架价格等于或低于以下值的市场列表：:&nbsp;
                 <input type="number" step="0.01" id="${SETTING_PRICE_MIN_LIST_PRICE}" value=${getSettingWithDefault(SETTING_PRICE_MIN_LIST_PRICE)}>
             </div>
             <div style="margin-top:24px">
@@ -3839,23 +3836,23 @@
                 <input type="checkbox" id="${SETTING_QUICK_SELL_BUTTONS}" ${getSettingWithDefault(SETTING_QUICK_SELL_BUTTONS) == 1 ? 'checked' : ''}>
             </div>
             <div style="margin-top:24px;">
-                最低值：&nbsp;
+                最低售价：&nbsp;
                 <input type="number" step="0.01" id="${SETTING_MIN_NORMAL_PRICE}" value=${getSettingWithDefault(SETTING_MIN_NORMAL_PRICE)}>
-                &nbsp;和最高值:&nbsp;
+                &nbsp;和最高售价:&nbsp;
                 <input type="number" step="0.01" id="${SETTING_MAX_NORMAL_PRICE}" value=${getSettingWithDefault(SETTING_MAX_NORMAL_PRICE)}>
                 &nbsp;普通卡牌的价格
             </div>
             <div style="margin-top:6px;">
-                最低值：&nbsp;
+                最低售价：&nbsp;
                 <input type="number" step="0.01" id="${SETTING_MIN_FOIL_PRICE}" value=${getSettingWithDefault(SETTING_MIN_FOIL_PRICE)}>
-                &nbsp;和最高值:&nbsp;
+                &nbsp;和最高售价:&nbsp;
                 <input type="number" step="0.01" id="${SETTING_MAX_FOIL_PRICE}" value=${getSettingWithDefault(SETTING_MAX_FOIL_PRICE)}>
                 &nbsp;闪卡的价格
             </div>
             <div style="margin-top:6px;">
-                最低值：&nbsp;
+                最低售价：&nbsp;
                 <input type="number" step="0.01" id="${SETTING_MIN_MISC_PRICE}" value=${getSettingWithDefault(SETTING_MIN_MISC_PRICE)}>
-                &nbsp;和最高值:&nbsp;
+                &nbsp;和最高售价:&nbsp;
                 <input type="number" step="0.01" id="${SETTING_MAX_MISC_PRICE}" value=${getSettingWithDefault(SETTING_MAX_MISC_PRICE)}>
                 &nbsp;其他物品的价格
             </div>
@@ -3869,7 +3866,7 @@
             </div>
         </div>`);
 
-        unsafeWindow.ShowConfirmDialog('Steam市场plus', price_options).done(() => {
+        unsafeWindow.ShowConfirmDialog('Steam Economy Enhancer', price_options).done(() => {
             setSetting(SETTING_MIN_NORMAL_PRICE, $(`#${SETTING_MIN_NORMAL_PRICE}`, price_options).val());
             setSetting(SETTING_MAX_NORMAL_PRICE, $(`#${SETTING_MAX_NORMAL_PRICE}`, price_options).val());
             setSetting(SETTING_MIN_FOIL_PRICE, $(`#${SETTING_MIN_FOIL_PRICE}`, price_options).val());
@@ -3902,7 +3899,7 @@
         .market_commodity_orders_table { font-size:12px; font-family: "Motiva Sans", Sans-serif; font-weight: 300; }
         .market_commodity_orders_table th { padding-left: 10px; }
         #listings_group { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        #listings_sell{ text-align: right; color: #589328; font-weight:600; }
+        #listings_sell { text-align: right; color: #589328; font-weight:600; }
         #listings_buy { text-align: right; color: #589328; font-weight:600; }
         .market_listing_my_price { height: 50px; padding-right:6px; }
         .market_listing_edit_buttons.actual_content { width:276px; transition-property: background-color, border-color; transition-timing-function: linear; transition-duration: 0.5s;}
@@ -3913,7 +3910,7 @@
         .pick_and_sell_button > a { vertical-align: middle; }
         .market_relist_auto { margin-bottom: 8px;  }
         .market_relist_auto_label { margin-right: 6px; }
-        .quick_sell{ margin-right: 4px; }
+        .quick_sell { margin-right: 4px; }
 
         .spinner {margin:10px auto;width:50px;height:40px;text-align:center;font-size:10px;}
         .spinner > div {background-color:#ccc;height:100%;width:6px;display:inline-block;animation:sk-stretchdelay 1.2s infinite ease-in-out}
@@ -3996,4 +3993,4 @@
         iterator(0);
     };
     //#endregion
-}(jQuery, async));
+}(jQuery， async));
